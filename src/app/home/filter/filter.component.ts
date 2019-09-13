@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class FilterComponent implements OnInit, OnDestroy{
   public showSelectOption = false;
-  public showFiltersDropDown = false;
+  public showFiltersDropDown: boolean;
   public valueRange = { lower: 0, upper: 250 };
   public categoryFilter: number[] = [];
   public categories: NewCategories[] = [];
@@ -30,10 +30,10 @@ export class FilterComponent implements OnInit, OnDestroy{
     this.innerWidth = window.innerWidth;
     if (this.innerWidth < 768) {
       this.isDesktop = false;
-      // this.showFiltersDropDown = false;/
+      this.showFiltersDropDown = false;
     } else {
       this.isDesktop = true;
-      // this.showFiltersDropDown = false;/
+      this.showFiltersDropDown = false;
     }
 
     this.cSub = this.service.getCategories().subscribe(categories => {
@@ -126,7 +126,6 @@ export class FilterComponent implements OnInit, OnDestroy{
 
   openFiltersDropDown() {
     this.showFiltersDropDown = !this.showFiltersDropDown;
-    console.log('awdawd');
   }
 
   ngOnDestroy() {
