@@ -1,0 +1,65 @@
+<div 
+  *ngIf="!isDesktop" 
+  class='filter-container-menu'
+  (click)="openFiltersDropDown()"
+>
+    <ion-label>Filters</ion-label>
+    <span class="filter-container-menu__icon"><ion-icon name="funnel"></ion-icon></span>
+</div>
+<div 
+  class='filter-container'
+  [ngClass]="{'filters-dropdown': showFiltersDropDown}"
+>
+<div class='filter-container__wrap'>
+    <p class='filter-container__title margin-top-none'>city</p>
+    <div 
+      class="select"
+      (click)="openSelect()"
+    >
+      <div class='select__content'>
+          <span>{{ selectValue | titlecase }}</span>
+          <ion-icon *ngIf="showSelectOption" class='select__arrow' name="arrow-dropup"></ion-icon>
+          <ion-icon *ngIf="!showSelectOption" class='select__arrow' name="arrow-dropdown"></ion-icon>
+      </div>
+      <ion-list 
+        lines='none' 
+        class='select__dropdown ion-no-padding' 
+        *ngIf="showSelectOption"
+      >
+        <ion-item 
+          *ngFor="let city of service['cities']" 
+          (click)="selectChanges(city.name, city.id)" 
+          class='select__dropdown-item'
+        >
+          <ion-label>{{ city.name | titlecase }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  
+    <p class='filter-container__title'>categories</p>
+    <div class='checkbox'>
+      <div 
+        *ngFor="let category of categories" 
+        class='checkbox__content'
+      >
+        <ion-checkbox slot="end" [(ngModel)]="category.isChecked" (click)="handlerCheckbox($event, category.id)"></ion-checkbox>
+        <span class='checkbox__content-text'>{{category.name}} <span class='checkbox__content-sum'>({{category.sum ? category.sum : 0}})</span></span>
+      </div>
+    </div>
+  
+    <p class='filter-container__title margin-bottom'>price</p>
+    <div class='range'>
+      <div class='range__content'>
+        <ion-range [(ngModel)]="valueRange" min="0" max="250" dual-knobs ></ion-range>
+      </div>
+      <div class='range__price-container'>
+        <div class='range__price-content'>
+          <span>{{valueRange['lower']}}$</span>- <span>{{valueRange['upper']}}$</span>
+        </div>
+        <ion-button fill="clear" (click)="handlerFilters()">Filter</ion-button>
+      </div>
+    </div>
+</div>
+<span class='close-dropdown' *ngIf="!isDesktop"(click)="openFiltersDropDown()">Закрыть</span>
+
+</div>

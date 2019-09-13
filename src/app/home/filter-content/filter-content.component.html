@@ -1,0 +1,21 @@
+
+<div class='filter-content__box'>
+  <div class='filter-content__wrap' *ngFor="let card of cards">
+    <ion-card class='filter-content__container ion-no-margin'>
+        <div class='filter-content__img-container'>
+            <img class='filter-content__img' [src]="imgUrl" />
+            <span class='filter-content__img-text'>{{card.cityName}}</span>
+            <div class='filter-content__img-hover-content'></div>
+        </div>
+    
+      <ion-card-content class='filter-content__container-content'>
+        <p class='filter-content__title'>{{card.name}}</p>
+      </ion-card-content>
+
+      <div class='filter-content__price-content'>
+          <span>{{card.categoryName}}</span>
+          <span class='filter-content__price-info'>{{card.price}}$</span>
+        </div>
+    </ion-card>
+  </div>
+</div>
