@@ -114,7 +114,6 @@ export class FilterComponent implements OnInit, OnDestroy{
 
     if (filters) {
       this.service.emitNewData(filters.data);
-      localStorage.clear();
     } else {
       this.fSub = this.service.setFilters({...filtersData}).subscribe(data => {
         filtersData[`data`] = data;
