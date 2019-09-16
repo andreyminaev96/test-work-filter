@@ -58,16 +58,16 @@ export class FiltersService {
   }
 
   setFilters({city, categories, price}): Observable<Data[]> {
-    if (city && categories.length !== 0 && price) {
+    if (city && categories.length && price) {
       const data = arrFilter(categories, this.data);
       this.filetData = data.filter(item => item[`city`] === city && item[`price`] > price.lower && item[`price`] <= price.upper);
-    } else if (city && categories.length !== 0 ) {
+    } else if (city && categories.length) {
       const data = arrFilter(categories, this.data);
       this.filetData = data.filter(item => item[`city`] === city);
     } else if (city && price) {
         this.filetData = this.data
           .filter(item => item.city === city && item.price > price.lower && item.price <= price.upper);
-    } else if (categories.length !== 0  && price) {
+    } else if (categories.length && price) {
         const data = arrFilter(categories, this.data);
         this.filetData = data.filter(item => item[`price`] > price.lower && item[`price`] <= price.upper);
     } else if (price) {

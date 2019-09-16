@@ -80,7 +80,7 @@ export class FilterComponent implements OnInit, OnDestroy{
 
 
   openSelect() {
-    this. showSelectOption = !this.showSelectOption;
+    this.showSelectOption = !this.showSelectOption;
   }
 
   selectChanges(cityName: string, id: number) {
